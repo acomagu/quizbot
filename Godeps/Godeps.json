@@ -1,0 +1,6 @@
+{
+	"ImportPath": "chatbot-workshop-1",
+	"GoVersion": "go1.6",
+	"GodepVersion": "v74",
+	"Deps": []
+}
