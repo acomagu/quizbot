@@ -9,6 +9,11 @@ func main() {
 	fmt.Println("Hello, world!")
 	fmt.Println("I'm in heroku now!")
 
-	hoge := os.Getenv("HOGE")
-	fmt.Println(hoge)
+	lineChannelID := os.Getenv("LINE_CHANNEL_ID")
+	lineChannelSecret := os.Getenv("LINE_CHANNEL_SECRET")
+	lineMID := os.Getenv("LINE_MID")
+
+	fmt.Println(lineChannelID)
+	fmt.Println(lineChannelSecret)
+	fmt.Println(lineMID)
 }
