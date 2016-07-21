@@ -43,6 +43,8 @@ func main() {
 					continue
 				}
 				fmt.Println(text.Text)
+
+				res, err := bot.SendText([]string{content.From}, "Hello, "+text.Text)
 			}
 		}
 	})
