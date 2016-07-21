@@ -20,13 +20,31 @@ func main() {
 	lineMID := os.Getenv("LINE_MID")
 	port := os.Getenv("PORT")
 
-	_, err = linebot.NewClient(int64(lineChannelID), lineChannelSecret, lineMID)
+	bot, err := linebot.NewClient(int64(lineChannelID), lineChannelSecret, lineMID)
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(req.Body)
+
+		received, err := bot.ParseRequest(req)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		for _, result := range received.Results {
+			content := result.Content()
+			if content != nil && content.IsMessage && content.ContentType == linebot.ContentTypeText {
+				text, err := content.TextContent()
+				if err != nil {
+					fmt.Println(err)
+					continue
+				}
+				fmt.Println(text.Text)
+			}
+		}
 	})
 	http.ListenAndServe(":"+port, nil)
 }
