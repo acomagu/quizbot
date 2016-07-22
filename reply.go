@@ -1,13 +1,6 @@
 package main
 
-import (
-	"math/rand"
-)
-
-type QA struct {
-	question []string
-	answer string
-}
+import ()
 
 var stage int = 0
 
@@ -16,19 +9,25 @@ func reply(text string, userID string) error {
 
 	userIDs := []string{userID}
 
-	qa := oneQA()
+	question := []string{
+		"もんだぃ。ゎたしゎなんさぃ?",
+		"1. 14さぃ",
+		"2. 24さぃ",
+		"3. 64さぃ",
+	}
+	answer := "3"
 
 	switch stage {
 	case 0:
-		err = sendTexts(userIDs, qa.question)
+		err = sendTexts(userIDs, question)
 		stage = 1
 	case 1:
-		if text == qa.answer {
+		if text == answer {
 			_, err = bot.SendText(userIDs, "なんで知ってるの...?")
 		} else {
 			sendTexts(userIDs, []string{
 				"やーいやーーいwwwwwwwwwwwwwwwwwww",
-				"せぃかぃゎ"+qa.answer,
+				"せぃかぃゎ"+answer,
 			})
 		}
 		stage = 0
@@ -45,37 +44,4 @@ func sendTexts(userIDs []string, texts []string) error {
 		}
 	}
 	return nil
-}
-
-func oneQA() QA {
-	qas := []QA{
-		QA{
-			question: []string{
-				"もんだぃ。ゎたしゎなんさぃ?",
-				"1. 14さぃ",
-				"2. 24さぃ",
-				"3. 64さぃ",
-			},
-			answer: "3",
-		},
-		QA{
-			question: []string{
-				"こんにちは。僕の今日のラッキーカラーは?",
-				"1. Blue",
-				"2. イエロー☆",
-				"3. Red",
-			},
-			answer: "1",
-		},
-		QA{
-			question: []string{
-				"やっほー",
-				"1. あっほー",
-				"2. ぽっぽー",
-				"3. ぴっぴー",
-			},
-			answer: "2",
-		},
-	}
-	return qas[rand.Intn(len(qas))]
 }
