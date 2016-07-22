@@ -12,6 +12,9 @@ func main() {
 	fmt.Println("Hello, world!")
 	fmt.Println("I'm in heroku now!")
 
+	os.Setenv("HTTP_PROXY", os.Getenv("FIXIE_PROXY"))
+	os.Setenv("HTTPS_PROXY", os.Getenv("FIXIE_PROXY"))
+
 	lineChannelID, err := strconv.Atoi(os.Getenv("LINE_CHANNEL_ID"))
 	if err != nil {
 		fmt.Println(err)
