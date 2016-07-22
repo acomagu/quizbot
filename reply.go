@@ -2,6 +2,8 @@ package main
 
 import ()
 
+var stage int = 0
+
 func reply(text string, userID string) error {
 	userIDs := []string{userID}
 	_, err := bot.SendText(userIDs, "Hello, "+text)
@@ -14,7 +16,23 @@ func reply(text string, userID string) error {
 		"2. 24さぃ",
 		"3. 64さぃ",
 	}
-	err = sendTexts(userIDs, question)
+	answer := "3"
+
+	switch stage {
+	case 0:
+		err = sendTexts(userIDs, question)
+		stage = 1
+	case 1:
+		if text == answer {
+			bot.SendText(userIDs, "どうしてしってるの?")
+		} else {
+			err = sendTexts(userIDs, []string{
+				"やーいやーいwwwwwww",
+				"せぃかぃは"+answer,
+			})
+		}
+		stage = 0
+	}
 	return err
 }
 
