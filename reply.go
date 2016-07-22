@@ -17,6 +17,7 @@ func reply(text string, userID string) error {
 	switch stage {
 	case 0:
 		err = sendTexts(userIDs, question)
+		stage = 1
 	case 1:
 		if text == answer {
 			_, err = bot.SendText(userIDs, "せぃかぃ")
@@ -26,6 +27,7 @@ func reply(text string, userID string) error {
 				"正解は"+answer,
 			})
 		}
+		stage = 0
 	}
 	return err
 }
