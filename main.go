@@ -46,6 +46,11 @@ func main() {
 					continue
 				}
 				fmt.Println(text.Text)
+
+				_, err = bot.SendText([]string{content.From}, "Hello, "+text.Text)
+				if err != nil {
+					fmt.Println(err)
+				}
 			}
 		}
 	})
