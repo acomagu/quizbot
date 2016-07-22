@@ -12,9 +12,6 @@ func main() {
 	fmt.Println("Hello, world!")
 	fmt.Println("I'm in heroku now!")
 
-	os.Setenv("HTTP_PROXY", os.Getenv("FIXIE_URL"))
-	os.Setenv("HTTPS_PROXY", os.Getenv("FIXIE_URL"))
-
 	lineChannelID, err := strconv.Atoi(os.Getenv("LINE_CHANNEL_ID"))
 	if err != nil {
 		fmt.Println(err)
@@ -46,11 +43,6 @@ func main() {
 					continue
 				}
 				fmt.Println(text.Text)
-
-				_, err = bot.SendText([]string{content.From}, "Hello, "+text.Text)
-				if err != nil {
-					fmt.Println(err)
-				}
 			}
 		}
 	})
