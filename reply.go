@@ -9,30 +9,40 @@ type QA struct {
 	answer string
 }
 
-var qa QA
-var stage int = 0
+type State struct {
+	qa QA
+	stage int
+}
+
+var states map[string]State = make(map[string]State)
 
 func reply(text string, userID string) error {
 	var err error
 
 	userIDs := []string{userID}
 
-	switch stage {
+	state, ok := states[userID]
+	if !ok {
+		state = initialState()
+	}
+
+	switch state.stage {
 	case 0:
-		qa = oneQA()
-		err = sendTexts(userIDs, qa.question)
-		stage = 1
+		state.qa = oneQA()
+		err = sendTexts(userIDs, state.qa.question)
+		state.stage = 1
 	case 1:
-		if text == qa.answer {
+		if text == state.qa.answer {
 			_, err = bot.SendText(userIDs, "なんで知ってるの...?")
 		} else {
 			sendTexts(userIDs, []string{
 				"やーいやーーいwwwwwwwwwwwwwwwwwww",
-				"せぃかぃゎ"+qa.answer,
+				"せぃかぃゎ"+state.qa.answer,
 			})
 		}
-		stage = 0
+		state.stage = 0
 	}
+	states[userID] = state
 
 	return err
 }
@@ -78,4 +88,11 @@ func oneQA() QA {
 		},
 	}
 	return qas[rand.Intn(len(qas))]
+}
+
+func initialState() State {
+	return State{
+		qa: oneQA(),
+		stage: 0,
+	}
 }
