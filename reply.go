@@ -43,6 +43,8 @@ func reply(text string, userID string) error {
 		state.stage = 0
 	}
 
+	states[userID] = state
+
 	return err
 }
 
