@@ -2,8 +2,11 @@ package main
 
 import ()
 
-func reply(text string, userID string) error {
-	userIDs := []string{userID}
+type Message string
+type UserID string
+
+func reply(text Message, userID UserID) error {
+	userIDs := []UserID{userID}
 	state := stateBy(userID)
 	replies, newState := generateReplies(text, state)
 	err := sendTexts(userIDs, replies)
@@ -15,40 +18,49 @@ func reply(text string, userID string) error {
 	return nil
 }
 
-func generateReplies(text string, state State) ([]string, State) {
-	var replies []string
+func generateReplies(text Message, state State) ([]Message, State) {
+	var replies []Message
 	newState := state
 
 	switch state.stage {
-	case 0:
+	case _Ask:
 		qa := oneQA()
 		replies = qa.question
 		newState.qa = qa
-		newState.stage = 1
-	case 1:
+		newState.stage = _Answer
+	case _Answer:
 		if isCorrectAnswer(text, state.qa) {
-			replies = []string{"なんで知ってるの...?"}
+			replies = []Message{"なんで知ってるの...?"}
 		} else {
-			replies = []string{
+			replies = []Message{
 				"やーいやーーいwwwwwwwwwwwwwwwwwww",
-				"せぃかぃゎ"+state.qa.answer,
+				Message("せぃかぃゎ"+state.qa.answer),
 			}
 		}
-		newState.stage = 0
+		newState.stage = _Ask
 	}
 	return replies, newState
 }
 
-func isCorrectAnswer(text string, qa QA) bool {
-	return text == qa.answer
+func isCorrectAnswer(text Message, qa QA) bool {
+	return text == Message(qa.answer)
 }
 
-func sendTexts(userIDs []string, texts []string) error {
+func sendTexts(userIDs []UserID, texts []Message) error {
+	stringUserIDs := userIDsToStrings(userIDs)
 	for _, text := range texts {
-		_, err := bot.SendText(userIDs, text)
+		_, err := bot.SendText(stringUserIDs, string(text))
 		if err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+func userIDsToStrings(orig []UserID) []string {
+	var res []string
+	for _, userID := range orig {
+		res = append(res, string(userID))
+	}
+	return res
 }

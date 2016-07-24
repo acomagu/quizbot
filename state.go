@@ -2,18 +2,25 @@ package main
 
 import ()
 
+type Stage int
+
 type State struct {
 	qa QA
-	stage int
+	stage Stage
 }
 
-var states map[string]State = make(map[string]State)
+const (
+	_Ask Stage = iota
+	_Answer
+)
 
-func setStateBy(userID string, state State) {
+var states map[UserID]State = make(map[UserID]State)
+
+func setStateBy(userID UserID, state State) {
 	states[userID] = state
 }
 
-func stateBy(userID string) State {
+func stateBy(userID UserID) State {
 	state, ok := states[userID]
 	if !ok {
 		state = initialState()
@@ -24,6 +31,6 @@ func stateBy(userID string) State {
 func initialState() State {
 	return State{
 		qa: oneQA(),
-		stage: 0,
+		stage: _Ask,
 	}
 }

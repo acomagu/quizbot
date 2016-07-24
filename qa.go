@@ -5,13 +5,13 @@ import (
 )
 
 type QA struct {
-	question []string
+	question []Message
 	answer string
 }
 
 var qas []QA = []QA{
 	QA{
-		question: []string{
+		question: []Message{
 			"もんだぃ。ゎたしゎなんさぃ?",
 			"1. 14さぃ",
 			"2. 24さぃ",
@@ -20,7 +20,7 @@ var qas []QA = []QA{
 		answer: "3",
 	},
 	QA{
-		question: []string{
+		question: []Message{
 			"こんにちは。僕のラッキーカラーは何でしょう?",
 			"1. Blue",
 			"2. イエロー☆",
@@ -29,7 +29,7 @@ var qas []QA = []QA{
 		answer: "1",
 	},
 	QA{
-		question: []string{
+		question: []Message{
 			"やっほー",
 			"1. うっほー",
 			"2. ごっほー",

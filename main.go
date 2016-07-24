@@ -48,7 +48,7 @@ func handleRequest(w http.ResponseWriter, req *http.Request) {
 			}
 			fmt.Println(text.Text)
 
-			err = reply(text.Text, content.From)
+			err = reply(Message(text.Text), UserID(content.From))
 			if err != nil {
 				fmt.Println(err)
 			}
