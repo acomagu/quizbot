@@ -18,6 +18,8 @@ First, set your LINE API keys as environment variables on Heroku:
 - LINE_CHANNEL_SECRET
 - LINE_MID
 
+Make sure your config of buildpacks and plugin.
+
 Then, push this working directory to your application repository of Heroku.
 
 ## Licence
