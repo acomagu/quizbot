@@ -2,9 +2,12 @@
 	"ImportPath": "chatbot-workshop-1",
 	"GoVersion": "go1.6",
 	"GodepVersion": "v74",
+	"Packages": [
+		"github.com/line/line-bot-sdk-go"
+	],
 	"Deps": [
 		{
-			"ImportPath": "github.com/line/line-bot-sdk-go/linebot",
+			"ImportPath": "github.com/line/line-bot-sdk-go",
 			"Rev": "8635ae812e60724b61ee9f0f9d9bf5c43a49f306"
 		}
 	]
