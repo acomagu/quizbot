@@ -3,6 +3,7 @@
 	"GoVersion": "go1.6",
 	"GodepVersion": "v74",
 	"Packages": [
+		".",
 		"github.com/line/line-bot-sdk-go/linebot"
 	],
 	"Deps": [
