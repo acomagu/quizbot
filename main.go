@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/line/line-bot-sdk-go/linebot"
+	"net/http"
 	"os"
 	"strconv"
-	"net/http"
-	"github.com/line/line-bot-sdk-go/linebot"
 )
 
 var bot *linebot.Client

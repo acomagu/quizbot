@@ -34,7 +34,7 @@ func generateReplies(text Message, state State) ([]Message, State) {
 		} else {
 			replies = []Message{
 				"やーいやーーいwwwwwwwwwwwwwwwwwww",
-				Message("せぃかぃゎ"+state.qa.answer),
+				Message("せぃかぃゎ" + state.qa.answer),
 			}
 		}
 		newState.stage = _Ask

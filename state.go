@@ -5,7 +5,7 @@ import ()
 type Stage int
 
 type State struct {
-	qa QA
+	qa    QA
 	stage Stage
 }
 
@@ -30,7 +30,7 @@ func stateBy(userID UserID) State {
 
 func initialState() State {
 	return State{
-		qa: oneQA(),
+		qa:    oneQA(),
 		stage: _Ask,
 	}
 }

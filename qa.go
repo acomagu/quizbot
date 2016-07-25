@@ -6,7 +6,7 @@ import (
 
 type QA struct {
 	question []Message
-	answer string
+	answer   string
 }
 
 var qas []QA = []QA{
