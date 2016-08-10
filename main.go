@@ -11,9 +11,10 @@ import (
 var bot *linebot.Client
 
 func main() {
+	var err error
 	configProxy()
 
-	bot, err := lineClient()
+	bot, err = lineClient()
 	if err != nil {
 		fmt.Println(err)
 	}
